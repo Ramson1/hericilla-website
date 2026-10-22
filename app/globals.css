@@ -1,0 +1,13 @@
+@import "tailwindcss";
+@import "@hericilla/config/tokens.css";
+
+/* Website-specific extras */
+.prose-article {
+  @apply text-[1.05rem] leading-[1.8] text-ink;
+}
+.prose-article h2 { @apply text-2xl font-bold mt-8 mb-3 text-brand-900; }
+.prose-article h3 { @apply text-xl font-bold mt-6 mb-2 text-brand-900; }
+.prose-article p { @apply mb-4; }
+.prose-article ul { @apply list-disc pl-6 mb-4 space-y-1; }
+.prose-article a { @apply text-brand-600 underline; }
+.prose-article strong { @apply font-semibold; }
