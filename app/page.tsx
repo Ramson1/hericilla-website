@@ -1,8 +1,9 @@
 import Link from "next/link";
-import { Truck, Package, Ship, Building2, Boxes, Flame, ArrowRight, Star } from "lucide-react";
+import { Truck, Package, Ship, Building2, Boxes, Flame, Star } from "lucide-react";
 import { services, clientReferences, company } from "@/lib/company";
 import { getPosts, getTestimonials, getPageContent } from "@/lib/db";
 import { BigButton } from "@hericilla/ui";
+import { HeroCarousel } from "@/components/site/HeroCarousel";
 
 export const revalidate = 60;
 
@@ -28,44 +29,21 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-gradient-to-br from-brand-900 via-brand-800 to-brand-700 text-white">
-        <div className="mx-auto max-w-6xl px-4 py-20 md:py-28">
-          <p className="inline-flex items-center gap-2 rounded-full bg-white/10 px-4 py-1.5 text-sm font-semibold">
-            RC {company.rc} · Port Harcourt, Nigeria
-          </p>
-          <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-tight md:text-5xl">
-            {heroTitle}
-          </h1>
-          <p className="mt-6 max-w-2xl text-xl leading-relaxed text-brand-100">{heroSubtitle}</p>
-          <div className="mt-10 flex flex-wrap gap-4">
-            <Link
-              href="/quote"
-              className="inline-flex items-center gap-2 rounded-[var(--radius-btn)] bg-accent-500 px-8 py-4 text-xl font-bold text-brand-950 shadow-lg hover:bg-accent-400"
-            >
-              Request a Quote <ArrowRight className="h-6 w-6" />
-            </Link>
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 rounded-[var(--radius-btn)] border-2 border-white/40 px-8 py-4 text-xl font-semibold hover:bg-white/10"
-            >
-              Explore services
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Hero — animated carousel of our operations */}
+      <HeroCarousel title={heroTitle} subtitle={heroSubtitle} />
 
-      {/* Stats */}
-      <section className="mx-auto -mt-10 max-w-6xl px-4">
-        <dl className="grid grid-cols-2 gap-4 rounded-[var(--radius-card)] bg-white p-6 shadow-[var(--shadow-card)] md:grid-cols-4">
-          {company.stats.map((s) => (
-            <div key={s.label} className="text-center">
-              <dt className="sr-only">{s.label}</dt>
-              <dd className="text-3xl font-extrabold text-brand-800">{s.value}</dd>
-              <dd className="mt-1 text-ink-soft">{s.label}</dd>
-            </div>
-          ))}
-        </dl>
+      {/* Stats — own band, directly below the hero (no overlap with the carousel controls) */}
+      <section className="border-b border-line bg-white py-10">
+        <div className="mx-auto max-w-6xl px-4">
+          <dl className="grid grid-cols-2 gap-6 md:grid-cols-4">
+            {company.stats.map((s) => (
+              <div key={s.label} className="flex flex-col-reverse text-center">
+                <dt className="mt-1 text-ink-soft">{s.label}</dt>
+                <dd className="text-3xl font-extrabold text-brand-800">{s.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </section>
 
       {/* Services */}

@@ -1,7 +1,56 @@
 @import "tailwindcss";
 @import "@hericilla/config/tokens.css";
 
+/* Public website uses normal web sizing (the elderly-first 18px scale stays for admin/staff/driver) */
+@theme {
+  --text-base: 1rem;
+  --text-base--line-height: 1.5;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.55;
+  --text-xl: 1.25rem;
+  --text-2xl: 1.5rem;
+  --text-3xl: 1.875rem;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  line-height: 1.6;
+}
+
 /* Website-specific extras */
+
+/* Hero carousel: slow ken-burns drift on the active scene + progress fill on the indicator */
+@keyframes hero-kenburns {
+  from { transform: scale(1.04) translate3d(0, 0, 0); }
+  to { transform: scale(1.13) translate3d(-1.5%, -1%, 0); }
+}
+.hero-kb {
+  animation: hero-kenburns 9s ease-out forwards;
+  will-change: transform;
+}
+@keyframes hero-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.hero-fill {
+  animation-name: hero-fill;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+@keyframes hero-caption-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.hero-swap {
+  animation: hero-caption-in 700ms ease-out both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-kb, .hero-swap { animation: none; }
+}
+
 .prose-article {
   @apply text-[1.05rem] leading-[1.8] text-ink;
 }

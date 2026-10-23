@@ -19,9 +19,9 @@ export default function ContactPage() {
       />
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
-        <Card className="p-8">
+        <Card className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-wide text-brand-500">{company.adminOffice.label}</p>
-          <h2 className="mt-2 flex items-start gap-3 text-xl font-bold text-brand-900">
+          <h2 className="mt-2 flex items-start gap-3 break-words text-xl font-bold text-brand-900">
             <MapPin className="mt-1 h-6 w-6 shrink-0 text-brand-600" />
             {company.adminOffice.address}
           </h2>
@@ -33,15 +33,15 @@ export default function ContactPage() {
           </a>
           <a
             href={`mailto:${company.adminOffice.email}`}
-            className="mt-3 flex items-center gap-3 text-lg font-semibold text-brand-700 underline"
+            className="mt-3 flex min-w-0 items-center gap-3 break-all text-lg font-semibold text-brand-700 underline"
           >
             <Mail className="h-6 w-6" /> {company.adminOffice.email}
           </a>
         </Card>
 
-        <Card className="p-8">
+        <Card className="min-w-0">
           <p className="text-xs font-bold uppercase tracking-wide text-brand-500">{company.opsBase.label}</p>
-          <h2 className="mt-2 flex items-start gap-3 text-xl font-bold text-brand-900">
+          <h2 className="mt-2 flex items-start gap-3 break-words text-xl font-bold text-brand-900">
             <MapPin className="mt-1 h-6 w-6 shrink-0 text-brand-600" />
             {company.opsBase.address}
           </h2>
@@ -57,7 +57,7 @@ export default function ContactPage() {
         </Card>
       </div>
 
-      <Card className="mt-6 p-8">
+      <Card className="mt-6">
         <h2 className="flex items-center gap-3 text-xl font-bold text-brand-900">
           <Clock className="h-6 w-6 text-brand-600" /> Working hours
         </h2>
