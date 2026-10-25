@@ -17,7 +17,7 @@ export default function StatusPage() {
     try {
       if (!hasSupabaseEnv()) throw new Error("offline");
       const s = getSupabase();
-      const { data, error } = await s.rpc("get_enquiry_status", { p_ref: ref.trim() });
+      const { data, error } = await s.rpc("hericilla_get_enquiry_status", { p_ref: ref.trim() });
       if (error) throw error;
       const rows = (data as StatusRow[]) ?? [];
       if (rows.length === 0) setState("notfound");

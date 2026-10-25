@@ -17,7 +17,7 @@ export function NewsletterBox() {
     try {
       if (!hasSupabaseEnv()) throw new Error("no db");
       const { error } = await getSupabase()
-        .from("newsletter_subscribers")
+        .from("hericilla_newsletter_subscribers")
         .upsert({ email, source: "website_footer" }, { onConflict: "email" });
       if (error) throw error;
       setState("done");

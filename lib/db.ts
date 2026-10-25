@@ -25,7 +25,7 @@ export async function getPosts(limit = 12): Promise<BlogPost[]> {
   const s = db();
   if (!s) return [];
   const { data } = await s
-    .from("blog_posts")
+    .from("hericilla_blog_posts")
     .select("*")
     .eq("status", "published")
     .lte("published_at", new Date().toISOString())
@@ -38,7 +38,7 @@ export async function getPost(slug: string): Promise<BlogPost | null> {
   const s = db();
   if (!s) return null;
   const { data } = await s
-    .from("blog_posts")
+    .from("hericilla_blog_posts")
     .select("*")
     .eq("slug", slug)
     .eq("status", "published")
@@ -62,7 +62,7 @@ export async function getTestimonials(): Promise<Testimonial[]> {
     })) as Testimonial[];
   }
   const { data } = await s
-    .from("testimonials")
+    .from("hericilla_testimonials")
     .select("*")
     .eq("approved", true)
     .order("display_order", { ascending: true });
@@ -74,7 +74,7 @@ export async function getCareers(): Promise<Career[]> {
   const s = db();
   if (!s) return [];
   const { data } = await s
-    .from("careers")
+    .from("hericilla_careers")
     .select("*")
     .eq("status", "open")
     .order("created_at", { ascending: false });
@@ -85,7 +85,7 @@ export async function getCareers(): Promise<Career[]> {
 export async function getPageContent(key: string, fallback: string): Promise<string> {
   const s = db();
   if (!s) return fallback;
-  const { data } = await s.from("page_content").select("value").eq("key", key).maybeSingle();
+  const { data } = await s.from("hericilla_page_content").select("value").eq("key", key).maybeSingle();
   if (!data?.value) return fallback;
   const v = data.value as unknown;
   return typeof v === "string" ? v : fallback;

@@ -51,7 +51,7 @@ export function ChatWidget() {
       const s = getSupabase();
       const vt = token();
       const { data, error } = await s
-        .from("chat_threads")
+        .from("hericilla_chat_threads")
         .insert({ visitor_token: vt, status: "open" })
         .select()
         .single();
@@ -69,7 +69,7 @@ export function ChatWidget() {
       .channel(`chat-${id}`)
       .on(
         "postgres_changes",
-        { event: "INSERT", schema: "public", table: "chat_messages", filter: `thread_id=eq.${id}` },
+        { event: "INSERT", schema: "public", table: "hericilla_chat_messages", filter: `thread_id=eq.${id}` },
         (payload) => {
           const m = payload.new as Msg;
           setMessages((prev) => (prev.some((x) => x.id === m.id) ? prev : [...prev, m]));
@@ -79,7 +79,7 @@ export function ChatWidget() {
       .subscribe(async (status) => {
         if (status === "SUBSCRIBED") {
           const { data } = await s
-            .from("chat_messages")
+            .from("hericilla_chat_messages")
             .select("id, sender_role, body, created_at")
             .eq("thread_id", id)
             .order("created_at")
@@ -97,13 +97,13 @@ export function ChatWidget() {
     const s = getSupabase();
     const vt = token();
     const { data } = await s
-      .from("chat_messages")
+      .from("hericilla_chat_messages")
       .insert({ thread_id: threadId, sender_role: "visitor", body })
       .select()
       .single();
     if (data) setMessages((prev) => [...prev, data as Msg]);
     // keep the thread header warm for agents
-    await s.from("chat_threads").update({ last_message_at: new Date().toISOString() }).eq("id", threadId);
+    await s.from("hericilla_chat_threads").update({ last_message_at: new Date().toISOString() }).eq("id", threadId);
     void vt;
   }
 
