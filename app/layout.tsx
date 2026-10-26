@@ -3,6 +3,7 @@ import "./globals.css";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ChatWidget } from "@/components/ChatWidget";
+import { RecoveryRedirect } from "@/components/site/RecoveryRedirect";
 import { company } from "@/lib/company";
 import { siteUrl } from "@/lib/db";
 
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-dvh bg-surface text-ink antialiased">
+        <RecoveryRedirect />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:bg-white focus:p-4"
