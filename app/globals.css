@@ -1,7 +1,10 @@
 @import "tailwindcss";
 @import "@hericilla/config/tokens.css";
 
-/* Public website uses normal web sizing (the elderly-first 18px scale stays for admin/staff/driver) */
+/* Tailwind v4 does not scan workspace packages automatically — point it at the shared UI kit. */
+@source "../../../packages/ui/src";
+
+/* Public website sizing — slightly tighter line-height than the shared tokens (all portals now use normal font sizes) */
 @theme {
   --text-base: 1rem;
   --text-base--line-height: 1.5;

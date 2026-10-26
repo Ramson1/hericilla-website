@@ -118,6 +118,51 @@ export const clientReferences = [
   "Titan Tubulars",
 ];
 
+/** Approved client logos (public/clients) keyed by the reference names above. */
+export const clientLogos: Record<string, string> = {
+  "AOS Orwell": "/clients/aos-orwell.jpg",
+  "Best Land & Sea Resources": "/clients/best-land-sea.jpg",
+  "Geoplex DrillTeq": "/clients/geoplex-drillteq.png",
+  "Pimo-Mafuta Services": "/clients/pimo-mafuta.jpg",
+  Welltec: "/clients/welltec.jpg",
+  "Titan Tubulars": "/clients/titan-tubulars.jpg",
+};
+
+export type TeamMember = {
+  name: string;
+  role: string;
+  bio: string;
+  credentials: string[];
+};
+
+/** Management team from the corporate profile (Hericilla Profile). */
+export const team: TeamMember[] = [
+  {
+    name: "Ogundipe Paul",
+    role: "Managing Director",
+    bio: "Chartered Accountant with over 25 years of experience across finance, audit, trading, oil & gas, supply chain and global logistics. Served as Internal Auditor, Senior Accountant, Financial Controller, Assets/Agency & Commercial Manager and Supply Chain Group Lead at AOS Orwell before founding Hericilla.",
+    credentials: ["BSc Accounting", "MBA — Ladoke Akintola University of Technology", "MSc Corporate Governance — Leeds Metropolitan University, UK", "Fellow, ICAN", "Fellow, NIM"],
+  },
+  {
+    name: "Bright Efekoro",
+    role: "Executive Director",
+    bio: "Over 22 years in global logistics, cutting his teeth at Chellarams PLC and IAL Nigeria Limited, then as Logistics Manager at Schlumberger Nigeria. He also consults for downstream oil & gas operators on logistics delivery.",
+    credentials: ["22+ years global logistics", "Ex-Schlumberger Nigeria (Logistics Manager)"],
+  },
+  {
+    name: "Ogundipe Kikelomo",
+    role: "Director",
+    bio: "Management Science graduate with more than 10 years in senior civil service before moving into logistics. Brings deep expertise in international removals and plans our international business network and forecast planning.",
+    credentials: ["BSc Management Science", "10+ years senior civil service", "International removals specialist"],
+  },
+  {
+    name: "Joan Okere",
+    role: "Operations Manager",
+    bio: "History & International Relations graduate (University of Lagos) with 12 years in logistics. Former Transport Manager in heavy-duty trucking, she runs our Trucking and Transport operations day to day.",
+    credentials: ["BA History & International Relations — University of Lagos", "12 years logistics", "Former Transport Manager, heavy-duty trucking"],
+  },
+];
+
 export const whyUs = [
   {
     title: "Accountability built in",

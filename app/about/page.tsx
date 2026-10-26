@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader, Card } from "@hericilla/ui";
-import { company } from "@/lib/company";
+import { company, team } from "@/lib/company";
 import { getPageContent } from "@/lib/db";
 
 export const metadata: Metadata = {
@@ -78,6 +78,44 @@ export default async function AboutPage() {
               <Card key={v.title} className="p-6">
                 <h3 className="text-xl font-bold text-brand-800">{v.title}</h3>
                 <p className="mt-2 text-lg text-ink-soft">{v.body}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-bold text-brand-900">Meet the management team</h2>
+          <p className="mt-2 text-lg text-ink-soft">
+            Hericilla is led by a small team of hands-on professionals with decades of combined experience in
+            logistics, finance and the removals business.
+          </p>
+          <div className="mt-6 grid gap-6 md:grid-cols-2">
+            {team.map((m) => (
+              <Card key={m.name} className="p-7">
+                <div className="flex items-center gap-4">
+                  <div
+                    aria-hidden
+                    className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-brand-700 text-2xl font-extrabold text-white"
+                  >
+                    {m.name
+                      .split(" ")
+                      .map((w) => w[0])
+                      .join("")
+                      .slice(0, 2)}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-brand-900">{m.name}</h3>
+                    <p className="text-base font-semibold uppercase tracking-wide text-brand-500">{m.role}</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-lg leading-relaxed text-ink-soft">{m.bio}</p>
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {m.credentials.map((c) => (
+                    <li key={c} className="rounded-full bg-brand-50 px-3 py-1 text-sm font-semibold text-brand-800">
+                      {c}
+                    </li>
+                  ))}
+                </ul>
               </Card>
             ))}
           </div>

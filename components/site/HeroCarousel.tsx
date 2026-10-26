@@ -130,8 +130,6 @@ export function HeroCarousel({ title, subtitle }: { title: string; subtitle: str
       aria-roledescription="carousel"
       aria-label={`What we do — ${slides.length} scenes from our operations`}
       className="relative isolate overflow-hidden bg-brand-950 text-white"
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
       onBlurCapture={() => setPaused(false)}
       onKeyDown={onKeyDown}

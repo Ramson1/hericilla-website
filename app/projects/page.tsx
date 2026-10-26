@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { PageHeader, Card, EmptyState } from "@hericilla/ui";
-import { clientReferences, services } from "@/lib/company";
+import { clientLogos, clientReferences, services } from "@/lib/company";
 import { getPosts } from "@/lib/db";
 
 export const metadata: Metadata = {
@@ -33,9 +34,24 @@ export default async function ProjectsPage() {
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         {clientReferences.map((c) => (
           <Card key={c} className="p-7">
-            <p className="text-xs font-bold uppercase tracking-wide text-brand-500">Client reference</p>
-            <h2 className="mt-1 text-2xl font-bold text-brand-900">{c}</h2>
-            <p className="mt-2 text-lg text-ink-soft">{referenceNotes[c] ?? "Logistics and support services."}</p>
+            <div className="flex items-start gap-5">
+              {clientLogos[c] && (
+                <div className="flex h-20 w-28 shrink-0 items-center justify-center overflow-hidden rounded-xl border border-line bg-white p-2">
+                  <Image
+                    src={clientLogos[c]}
+                    alt={`${c} logo`}
+                    width={280}
+                    height={160}
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+              )}
+              <div>
+                <p className="text-xs font-bold uppercase tracking-wide text-brand-500">Client reference</p>
+                <h2 className="mt-1 text-2xl font-bold text-brand-900">{c}</h2>
+                <p className="mt-2 text-lg text-ink-soft">{referenceNotes[c] ?? "Logistics and support services."}</p>
+              </div>
+            </div>
           </Card>
         ))}
       </div>

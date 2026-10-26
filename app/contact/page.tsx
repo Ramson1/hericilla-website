@@ -62,7 +62,7 @@ export default function ContactPage() {
           <Clock className="h-6 w-6 text-brand-600" /> Working hours
         </h2>
         <p className="mt-2 text-lg text-ink-soft">
-          Office: Monday–Saturday, 8:00am–6:00pm. Fleet operations run around the clock — urgent movements at night
+          Office: Monday–Saturday, 9:00am–5:00pm. Fleet operations run around the clock — urgent movements at night
           are answered by the operations line.
         </p>
       </Card>
