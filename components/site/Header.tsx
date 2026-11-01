@@ -11,16 +11,21 @@ const primaryNav = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
-  { href: "/careers", label: "Careers" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
 const moreNav = [
   { href: "/blog", label: "Blog & News" },
+  { href: "/careers", label: "Careers" },
   { href: "/testimonials", label: "Testimonials" },
   { href: "/why-us", label: "Why Choose Us" },
   { href: "/hseq", label: "HSEQ" },
+];
+
+const ctaNav = [
+  { href: "/quote", label: "Request a Quote" },
+  { href: "/careers", label: "Join Our Team" },
 ];
 
 const allNav = [...primaryNav, ...moreNav];
@@ -32,18 +37,21 @@ export function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
+  const [ctaOpen, setCtaOpen] = useState(false);
   const [dark, setDark] = useState(false);
   // The hero band lives on the home page only — seed from the route so the very first
   // paint already floats the pill instead of reserving a strip above the hero.
   const [overHero, setOverHero] = useState(pathname === "/");
   const [barH, setBarH] = useState(0);
   const moreRef = useRef<HTMLDivElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
   const barRef = useRef<HTMLDivElement>(null);
 
   // Close every open menu whenever the route changes.
   useEffect(() => {
     setMobileOpen(false);
     setMoreOpen(false);
+    setCtaOpen(false);
   }, [pathname]);
 
   /* Measure the pill bar so it can be lifted out of the page flow over a hero
@@ -90,10 +98,12 @@ export function Header() {
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
       if (moreRef.current && !moreRef.current.contains(e.target as Node)) setMoreOpen(false);
+      if (ctaRef.current && !ctaRef.current.contains(e.target as Node)) setCtaOpen(false);
     }
     function onKey(e: KeyboardEvent) {
       if (e.key === "Escape") {
         setMoreOpen(false);
+        setCtaOpen(false);
         setMobileOpen(false);
       }
     }
@@ -217,9 +227,32 @@ export function Header() {
             >
               <Phone className="h-4 w-4" /> Call us
             </a>
-            <Link href="/quote" className={`hidden sm:inline-flex ${quoteClass}`}>
-              Request a Quote
-            </Link>
+            {/* CTA dropdown — Get Started */}
+            <div ref={ctaRef} className="relative hidden sm:block">
+              <button
+                type="button"
+                onClick={() => setCtaOpen((v) => !v)}
+                aria-expanded={ctaOpen}
+                className={`inline-flex items-center gap-1.5 ${quoteClass}`}
+              >
+                Get Started
+                <ChevronDown className={`h-4 w-4 transition-transform ${ctaOpen ? "rotate-180" : ""}`} />
+              </button>
+              {ctaOpen && (
+                <div className="absolute right-0 top-full z-50 mt-2 w-48 overflow-hidden rounded-2xl border border-line bg-white py-1 shadow-pop">
+                  {ctaNav.map((n) => (
+                    <Link
+                      key={n.href}
+                      href={n.href}
+                      onClick={() => setCtaOpen(false)}
+                      className="block px-4 py-2.5 text-[15px] font-medium text-ink hover:bg-brand-50 hover:text-brand-800 transition-colors"
+                    >
+                      {n.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
             <button
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
@@ -257,6 +290,9 @@ export function Header() {
               </a>
               <Link href="/quote" className={`inline-flex items-center justify-center ${quoteClass}`}>
                 Request a Quote
+              </Link>
+              <Link href="/careers" className={`col-span-2 inline-flex items-center justify-center ${quoteClass}`}>
+                Join Our Team
               </Link>
             </div>
           </nav>

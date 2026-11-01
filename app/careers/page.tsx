@@ -44,11 +44,7 @@ export default async function CareersPage() {
                     <MapPin className="h-5 w-5" /> {c.location}
                   </span>
                 )}
-                {c.closing_date && (
-                  <span className="font-semibold text-warning-800">
-                    Apply before {new Date(c.closing_date).toLocaleDateString()}
-                  </span>
-                )}
+
               </div>
               {c.description && <p className="mt-4 text-lg leading-relaxed text-ink-soft">{c.description}</p>}
               {c.requirements && (
