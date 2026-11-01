@@ -11,13 +11,13 @@ const primaryNav = [
   { href: "/", label: "Home" },
   { href: "/services", label: "Services" },
   { href: "/projects", label: "Projects" },
+  { href: "/careers", label: "Careers" },
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ];
 
 const moreNav = [
   { href: "/blog", label: "Blog & News" },
-  { href: "/careers", label: "Careers" },
   { href: "/testimonials", label: "Testimonials" },
   { href: "/why-us", label: "Why Choose Us" },
   { href: "/hseq", label: "HSEQ" },
