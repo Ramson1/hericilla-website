@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { PageHeader, Card } from "@hericilla/ui";
 import { company } from "@/lib/company";
+import { ContactForm } from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -57,29 +58,34 @@ export default function ContactPage() {
         </Card>
       </div>
 
-      <Card className="mt-6">
-        <h2 className="flex items-center gap-3 text-xl font-bold text-brand-900">
-          <Clock className="h-6 w-6 text-brand-600" /> Working hours
-        </h2>
-        <p className="mt-2 text-lg text-ink-soft">
-          Office: Monday–Saturday, 9:00am–5:00pm. Fleet operations run around the clock — urgent movements at night
-          are answered by the operations line.
-        </p>
-      </Card>
+      <div className="mt-8 grid gap-6 md:grid-cols-2">
+        <ContactForm />
+        <div className="space-y-6">
+          <Card>
+            <h2 className="flex items-center gap-3 text-xl font-bold text-brand-900">
+              <Clock className="h-6 w-6 text-brand-600" /> Working hours
+            </h2>
+            <p className="mt-2 text-lg text-ink-soft">
+              Office: Monday–Saturday, 9:00am–5:00pm. Fleet operations run around the clock — urgent movements at night
+              are answered by the operations line.
+            </p>
+          </Card>
 
-      <div className="mt-8 flex flex-wrap gap-4">
-        <Link
-          href="/quote"
-          className="inline-flex rounded-[var(--radius-btn)] bg-accent-500 px-8 py-4 text-xl font-bold text-white hover:bg-accent-600"
-        >
-          Request a quotation (faster for pricing)
-        </Link>
-        <Link
-          href="/status"
-          className="inline-flex rounded-[var(--radius-btn)] border-2 border-brand-300 px-8 py-4 text-xl font-semibold text-brand-800 hover:bg-brand-50"
-        >
-          Check an enquiry reference
-        </Link>
+          <div className="flex flex-col gap-4">
+            <Link
+              href="/quote"
+              className="inline-flex rounded-[var(--radius-btn)] bg-accent-500 px-8 py-4 text-xl font-bold text-white hover:bg-accent-600"
+            >
+              Request a quotation (faster for pricing)
+            </Link>
+            <Link
+              href="/status"
+              className="inline-flex rounded-[var(--radius-btn)] border-2 border-brand-300 px-8 py-4 text-xl font-semibold text-brand-800 hover:bg-brand-50"
+            >
+              Check an enquiry reference
+            </Link>
+          </div>
+        </div>
       </div>
 
       <p className="mt-8 text-base text-ink-soft">
