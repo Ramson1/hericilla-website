@@ -1,6 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Truck, Package, Ship, Building2, Boxes, Flame, Star } from "lucide-react";
-import { services, clientReferences, company } from "@/lib/company";
+import { services, clientReferences, clientLogos, company } from "@/lib/company";
 import { getPosts, getTestimonials, getPageContent } from "@/lib/db";
 import { BigButton } from "@hericilla/ui";
 import { HeroCarousel } from "@/components/site/HeroCarousel";
@@ -73,9 +74,24 @@ export default async function HomePage() {
           <p className="text-center text-sm font-bold uppercase tracking-wider text-ink-soft">
             Trusted by operators and service companies
           </p>
-          <ul className="mt-6 flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+          <ul className="mt-8 flex flex-wrap items-start justify-center gap-x-10 gap-y-8">
             {clientReferences.map((c) => (
-              <li key={c} className="text-lg font-semibold text-brand-800">{c}</li>
+              <li key={c} className="flex w-28 flex-col items-center text-center">
+                <span className="flex h-20 w-20 items-center justify-center overflow-hidden rounded-full bg-white shadow-sm ring-1 ring-line">
+                  {clientLogos[c] ? (
+                    <Image
+                      src={clientLogos[c]}
+                      alt={`${c} logo`}
+                      width={56}
+                      height={56}
+                      className="h-14 w-14 object-contain"
+                    />
+                  ) : (
+                    <span className="text-xl font-extrabold text-brand-700">{c.charAt(0)}</span>
+                  )}
+                </span>
+                <span className="mt-3 text-base font-bold text-brand-800">{c}</span>
+              </li>
             ))}
           </ul>
         </div>
