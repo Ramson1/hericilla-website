@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { company } from "@/lib/company";
 import { NewsletterBox } from "./NewsletterBox";
 
@@ -94,7 +95,21 @@ export function Footer() {
 
         <NewsletterBox />
 
-        <p className="mt-10 text-center text-sm text-brand-300">
+        <p className="mt-10 flex flex-wrap items-center justify-center gap-2 text-center text-sm text-brand-300">
+          Designed and Developed by{" "}
+          <a
+            href="https://blackboxtech.online"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 font-semibold text-white hover:underline"
+          >
+            <Image src="/blackboxtech.jpg" alt="Black-Box Tech logo" width={20} height={20} className="h-5 w-5 rounded-full" />
+            Black-Box Tech
+          </a>
+          , and Ayo Ogundipe.
+        </p>
+
+        <p className="mt-3 text-center text-sm text-brand-300">
           © {new Date().getFullYear()} Hericilla Support Services Limited. All rights reserved.
         </p>
       </div>
