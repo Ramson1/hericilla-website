@@ -106,7 +106,7 @@ export function Footer() {
             <Image src="/blackboxtech.jpg" alt="Black-Box Tech logo" width={20} height={20} className="h-5 w-5 rounded-full" />
             Black-Box Tech
           </a>
-          , and Ayo Ogundipe.
+           and Ayo Ogundipe.
         </p>
 
         <p className="mt-3 text-center text-sm text-brand-300">
