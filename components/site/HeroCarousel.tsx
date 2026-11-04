@@ -11,15 +11,13 @@ const DURATION = 6500;
 /** Hero photography is oil & gas only — every scene is real industry, no household or generic freight shots.
  *  Served from Unsplash (free to use, no attribution required — credited anyway).
  *  Swap these src values for the company's own site and fleet photos in /public/hero when available.
- *  Headline copy rides with the slide: title/subtitle fall back to the page_content values when omitted. */
+ *  Headline and subtitle are CMS-controlled (page_content) and shared across every slide, so they
+ *  are NOT set here — the `title`/`subtitle` props passed in by the page are always used. */
 const slides = [
   {
     src: "https://images.unsplash.com/photo-1528458538087-f58e9ad895da?auto=format&fit=crop&w=1920&q=80",
     alt: "Tanker truck on an open road hauling product",
     label: "Trucking & Haulage",
-    title: "Bulk and hazardous haulage, on schedule.",
-    subtitle:
-      "Tanker and flatbed movements for operators across the Niger Delta and beyond — sealed, documented and tracked on every trip.",
     href: "/services/trucking",
     credit: "ALE SAT",
   },
@@ -27,9 +25,6 @@ const slides = [
     src: "https://images.unsplash.com/photo-1726731782158-fcf6822b6ca4?auto=format&fit=crop&w=1920&q=80",
     alt: "Refinery process pipework and towers on site",
     label: "Procurement & Contract Management",
-    title: "Sourcing what the field actually demands.",
-    subtitle:
-      "Pipes, valves, fittings and consumables procured, vetted and delivered to specification — with full traceability from vendor to site.",
     href: "/services/procurement",
     credit: "Christian Harb",
   },
@@ -37,9 +32,6 @@ const slides = [
     src: "https://images.unsplash.com/photo-1780622558479-12ef1162515d?auto=format&fit=crop&w=1920&q=80",
     alt: "Industrial storage tanks at a fuel and chemical terminal",
     label: "Transportation & Distribution",
-    title: "Depot to field, without broken custody.",
-    subtitle:
-      "Scheduled distribution from tank farms and warehouses, with chain-of-custody records and proof of delivery on every load.",
     href: "/services/transportation",
     credit: "Sebastian Schuster",
   },
@@ -47,9 +39,6 @@ const slides = [
     src: "https://images.unsplash.com/photo-1690508313456-bf8c851e8319?auto=format&fit=crop&w=1920&q=80",
     alt: "Offshore oil and gas platform at sea",
     label: "Materials & Logistics Support",
-    title: "Materials that reach the rig on time.",
-    subtitle:
-      "Port clearance, marine coordination and last-mile delivery that keep offshore and onshore programmes moving without stalls.",
     href: "/services/materials-support",
     credit: "Gabriel Xavier",
   },
@@ -57,9 +46,6 @@ const slides = [
     src: "https://images.unsplash.com/photo-1788377563485-92b5c6196fbd?auto=format&fit=crop&w=1920&q=80",
     alt: "Industrial flare stack burning at an oil and gas facility",
     label: "Oil & Gas Support",
-    title: "Field-ready support for energy operations.",
-    subtitle:
-      "Integrated logistics, procurement and supply-chain services built around the demands of the Nigerian oil & gas industry.",
     href: "/services/oil-gas",
     credit: "Ghostinmirror",
   },
@@ -170,10 +156,10 @@ export function HeroCarousel({ title, subtitle }: { title: string; subtitle: str
         {/* Headline copy rides with the slide — swaps in on every transition */}
         <div key={`copy-${index}`} className="hero-swap min-h-[23rem] md:min-h-[18rem]">
           <h1 className="mt-6 max-w-3xl text-4xl font-extrabold leading-tight md:text-5xl">
-            {active.title ?? title}
+            {title}
           </h1>
           <p className="mt-6 max-w-2xl text-xl leading-relaxed text-brand-100">
-            {active.subtitle ?? subtitle}
+            {subtitle}
           </p>
           <div className="mt-7 flex flex-wrap items-center gap-x-3 gap-y-2">
             <span className="text-xs font-bold uppercase tracking-wider text-accent-400">{active.label}</span>

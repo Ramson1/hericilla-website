@@ -5,7 +5,9 @@ import { Footer } from "@/components/site/Footer";
 import { ChatWidget } from "@/components/ChatWidget";
 import { RecoveryRedirect } from "@/components/site/RecoveryRedirect";
 import { company } from "@/lib/company";
-import { siteUrl } from "@/lib/db";
+import { siteUrl, getContact } from "@/lib/db";
+
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -23,7 +25,8 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const contact = await getContact();
   return (
     <html lang="en">
       <body className="min-h-dvh bg-surface text-ink antialiased">
@@ -34,9 +37,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Skip to main content
         </a>
-        <Header />
+        <Header contact={contact} />
         <main id="main">{children}</main>
-        <Footer />
+        <Footer contact={contact} />
         <ChatWidget />
       </body>
     </html>

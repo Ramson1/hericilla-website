@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader, Card } from "@hericilla/ui";
 import { company, team } from "@/lib/company";
-import { getPageContent } from "@/lib/db";
+import { getPageContent, getContact } from "@/lib/db";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -30,10 +32,7 @@ const values = [
 ];
 
 export default async function AboutPage() {
-  const intro = await getPageContent(
-    "about_intro",
-    "Hericilla Support Services Limited is a Port Harcourt–based logistics and supply chain company serving oil & gas operators, servicing companies and contractors. Since 2020 we have combined heavy-duty trucking, procurement and contract management, packing and international removals, materials supply and ships agency under one disciplined operation.",
-  );
+  const [intro, contact] = await Promise.all([getPageContent("about_intro"), getContact()]);
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-14">
@@ -49,8 +48,8 @@ export default async function AboutPage() {
           <p className="mt-4 text-lg leading-relaxed text-ink-soft">
             Our management team brings a combined decade of experience in the removals and logistics business, backed by
             degreed and certified professionals in transportation, haulage, buying and selling. We operate from our
-            administrative office at {company.adminOffice.address.split("—")[0].trim()} with our operational base at{" "}
-            {company.opsBase.address.split("—")[0].trim()}, keeping trucks, crews and documentation moving 24/7.
+            administrative office at {contact.adminOffice.address.split("—")[0].trim()} with our operational base at{" "}
+            {contact.opsBase.address.split("—")[0].trim()}, keeping trucks, crews and documentation moving 24/7.
           </p>
         </Card>
 

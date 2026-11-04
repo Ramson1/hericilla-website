@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Truck, Package, Ship, Building2, Boxes, Flame, Star } from "lucide-react";
 import { services, clientReferences, clientLogos, company } from "@/lib/company";
-import { getPosts, getTestimonials, getPageContent } from "@/lib/db";
+import { getPosts, getTestimonials, getPageContentMap } from "@/lib/db";
 import { BigButton } from "@hericilla/ui";
 import { HeroCarousel } from "@/components/site/HeroCarousel";
 
@@ -18,20 +18,16 @@ const icons: Record<string, React.ReactNode> = {
 };
 
 export default async function HomePage() {
-  const [posts, testimonials, heroTitle, heroSubtitle] = await Promise.all([
+  const [posts, testimonials, page] = await Promise.all([
     getPosts(3),
     getTestimonials(),
-    getPageContent("home.hero_title", "Moving cargo. Sourcing equipment. Supporting Nigeria's energy sector."),
-    getPageContent(
-      "home.hero_subtitle",
-      "Hericilla Support Services Limited delivers integrated logistics, procurement and supply-chain solutions to the Nigerian oil & gas industry — documented, accountable and on time.",
-    ),
+    getPageContentMap(["home.hero_title", "home.hero_subtitle"]),
   ]);
 
   return (
     <>
       {/* Hero — animated carousel of our operations */}
-      <HeroCarousel title={heroTitle} subtitle={heroSubtitle} />
+      <HeroCarousel title={page["home.hero_title"]} subtitle={page["home.hero_subtitle"]} />
 
       {/* Stats — own band, directly below the hero (no overlap with the carousel controls) */}
       <section className="border-b border-line bg-white py-10">

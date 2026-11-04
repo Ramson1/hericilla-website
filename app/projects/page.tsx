@@ -11,6 +11,8 @@ export const metadata: Metadata = {
     "Approved client references and project updates: rig support, heavy haulage, procurement contracts and relocations delivered across Nigeria.",
 };
 
+export const revalidate = 60;
+
 // One short, honest line per approved reference (no invented job details).
 const referenceNotes: Record<string, string> = {
   "AOS Orwell": "Equipment and materials logistics support.",

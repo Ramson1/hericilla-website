@@ -4,6 +4,8 @@ import { Star } from "lucide-react";
 import { PageHeader, Card, EmptyState } from "@hericilla/ui";
 import { getTestimonials } from "@/lib/db";
 
+export const revalidate = 60;
+
 export const metadata: Metadata = {
   title: "Testimonials",
   description: "What clients say about working with Hericilla Support Services — trucking, procurement and relocations in Nigeria.",

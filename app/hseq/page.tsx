@@ -2,6 +2,9 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { PageHeader, Card } from "@hericilla/ui";
 import { company } from "@/lib/company";
+import { getContact } from "@/lib/db";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "HSEQ — Health, Safety, Environment & Quality",
@@ -36,7 +39,8 @@ const commitments = [
   },
 ];
 
-export default function HseqPage() {
+export default async function HseqPage() {
+  const contact = await getContact();
   return (
     <div className="mx-auto max-w-5xl px-4 py-14">
       <PageHeader
@@ -65,8 +69,8 @@ export default function HseqPage() {
         <h2 className="text-2xl font-bold">Report a safety concern</h2>
         <p className="mt-2 text-lg text-brand-100">
           Seen something unsafe on a Hericilla vehicle or site? Call our operations line any time:{" "}
-          <a className="font-bold underline" href={`tel:${company.opsBase.phone.replace(/\s/g, "")}`}>
-            {company.opsBase.phone}
+          <a className="font-bold underline" href={`tel:${contact.opsBase.phone.replace(/\s/g, "")}`}>
+            {contact.opsBase.phone}
           </a>
           . Reports stay confidential.
         </p>

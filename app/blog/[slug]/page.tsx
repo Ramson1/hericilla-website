@@ -6,6 +6,8 @@ import ReactMarkdown from "react-markdown";
 import { getPosts, getPost, supabaseConfigured } from "@/lib/db";
 import { ArrowLeft } from "lucide-react";
 
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   if (!supabaseConfigured) return [];
   const posts = await getPosts(50);

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { company } from "@/lib/company";
+import type { ContactInfo } from "@/lib/types";
 import { NewsletterBox } from "./NewsletterBox";
 
 const columns = [
@@ -38,7 +39,7 @@ const columns = [
   },
 ];
 
-export function Footer() {
+export function Footer({ contact }: { contact: ContactInfo }) {
   return (
     <footer className="mt-20 bg-brand-950 text-brand-100">
       <div className="mx-auto max-w-6xl px-4 py-14">
@@ -66,28 +67,28 @@ export function Footer() {
 
         <div className="mt-12 grid gap-6 md:grid-cols-2">
           <div className="rounded-[var(--radius-card)] bg-brand-900 p-6">
-            <p className="font-bold text-white">{company.adminOffice.label}</p>
-            <p className="mt-1">{company.adminOffice.address}</p>
+            <p className="font-bold text-white">{contact.adminOffice.label}</p>
+            <p className="mt-1">{contact.adminOffice.address}</p>
             <p className="mt-1">
               Tel:{" "}
-              <a className="underline" href={`tel:${company.adminOffice.phone.replace(/\s/g, "")}`}>
-                {company.adminOffice.phone}
+              <a className="underline" href={`tel:${contact.adminOffice.phone.replace(/\s/g, "")}`}>
+                {contact.adminOffice.phone}
               </a>
             </p>
             <p>
               Email:{" "}
-              <a className="underline" href={`mailto:${company.adminOffice.email}`}>
-                {company.adminOffice.email}
+              <a className="underline" href={`mailto:${contact.adminOffice.email}`}>
+                {contact.adminOffice.email}
               </a>
             </p>
           </div>
           <div className="rounded-[var(--radius-card)] bg-brand-900 p-6">
-            <p className="font-bold text-white">{company.opsBase.label}</p>
-            <p className="mt-1">{company.opsBase.address}</p>
+            <p className="font-bold text-white">{contact.opsBase.label}</p>
+            <p className="mt-1">{contact.opsBase.address}</p>
             <p className="mt-1">
               Tel:{" "}
-              <a className="underline" href={`tel:${company.opsBase.phone.replace(/\s/g, "")}`}>
-                {company.opsBase.phone}
+              <a className="underline" href={`tel:${contact.opsBase.phone.replace(/\s/g, "")}`}>
+                {contact.opsBase.phone}
               </a>
             </p>
           </div>

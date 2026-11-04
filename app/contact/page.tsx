@@ -3,7 +3,10 @@ import Link from "next/link";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
 import { PageHeader, Card } from "@hericilla/ui";
 import { company } from "@/lib/company";
+import { getContact } from "@/lib/db";
 import { ContactForm } from "@/components/ContactForm";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -11,7 +14,8 @@ export const metadata: Metadata = {
     "Reach Hericilla Support Services — administrative office and operational base on Abuloma Road, Port Harcourt. Call, email or send an enquiry.",
 };
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const contact = await getContact();
   return (
     <div className="mx-auto max-w-4xl px-4 py-14">
       <PageHeader
@@ -21,39 +25,39 @@ export default function ContactPage() {
 
       <div className="mt-8 grid gap-6 md:grid-cols-2">
         <Card className="min-w-0">
-          <p className="text-xs font-bold uppercase tracking-wide text-brand-500">{company.adminOffice.label}</p>
+          <p className="text-xs font-bold uppercase tracking-wide text-brand-500">{contact.adminOffice.label}</p>
           <h2 className="mt-2 flex items-start gap-3 break-words text-xl font-bold text-brand-900">
             <MapPin className="mt-1 h-6 w-6 shrink-0 text-brand-600" />
-            {company.adminOffice.address}
+            {contact.adminOffice.address}
           </h2>
           <a
-            href={`tel:${company.adminOffice.phone.replace(/\s/g, "")}`}
+            href={`tel:${contact.adminOffice.phone.replace(/\s/g, "")}`}
             className="mt-4 flex items-center gap-3 rounded-[var(--radius-btn)] bg-brand-700 px-6 py-4 text-xl font-bold text-white hover:bg-brand-800"
           >
-            <Phone className="h-6 w-6" /> {company.adminOffice.phone}
+            <Phone className="h-6 w-6" /> {contact.adminOffice.phone}
           </a>
           <a
-            href={`mailto:${company.adminOffice.email}`}
+            href={`mailto:${contact.adminOffice.email}`}
             className="mt-3 flex min-w-0 items-center gap-3 break-all text-lg font-semibold text-brand-700 underline"
           >
-            <Mail className="h-6 w-6" /> {company.adminOffice.email}
+            <Mail className="h-6 w-6" /> {contact.adminOffice.email}
           </a>
         </Card>
 
         <Card className="min-w-0">
-          <p className="text-xs font-bold uppercase tracking-wide text-brand-500">{company.opsBase.label}</p>
+          <p className="text-xs font-bold uppercase tracking-wide text-brand-500">{contact.opsBase.label}</p>
           <h2 className="mt-2 flex items-start gap-3 break-words text-xl font-bold text-brand-900">
             <MapPin className="mt-1 h-6 w-6 shrink-0 text-brand-600" />
-            {company.opsBase.address}
+            {contact.opsBase.address}
           </h2>
           <p className="mt-3 text-lg text-ink-soft">
             Trucks, crews and dispatch. If your cargo is moving (or should be), this is the line to call.
           </p>
           <a
-            href={`tel:${company.opsBase.phone.replace(/\s/g, "")}`}
+            href={`tel:${contact.opsBase.phone.replace(/\s/g, "")}`}
             className="mt-4 flex items-center gap-3 rounded-[var(--radius-btn)] bg-brand-950 px-6 py-4 text-xl font-bold text-white hover:bg-brand-900"
           >
-            <Phone className="h-6 w-6" /> {company.opsBase.phone}
+            <Phone className="h-6 w-6" /> {contact.opsBase.phone}
           </a>
         </Card>
       </div>

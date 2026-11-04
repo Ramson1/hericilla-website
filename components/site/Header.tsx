@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { ChevronDown, Menu, Phone, X } from "lucide-react";
 import { company } from "@/lib/company";
+import type { ContactInfo } from "@/lib/types";
 
 const primaryNav = [
   { href: "/", label: "Home" },
@@ -33,7 +34,7 @@ const allNav = [...primaryNav, ...moreNav];
 /** Gap between the viewport top and the floating pill — matches `top-3` / `mt-3`. */
 const INSET = 12;
 
-export function Header() {
+export function Header({ contact }: { contact: ContactInfo }) {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
@@ -222,7 +223,7 @@ export function Header() {
 
           <div className="flex items-center gap-2">
             <a
-              href={`tel:${company.adminOffice.phone.replace(/\s/g, "")}`}
+              href={`tel:${contact.adminOffice.phone.replace(/\s/g, "")}`}
               className={`${callClass} hidden xl:inline-flex`}
             >
               <Phone className="h-4 w-4" /> Call us
@@ -285,7 +286,7 @@ export function Header() {
               ))}
             </ul>
             <div className="mt-3 grid grid-cols-2 gap-2">
-              <a href={`tel:${company.adminOffice.phone.replace(/\s/g, "")}`} className={callClass}>
+              <a href={`tel:${contact.adminOffice.phone.replace(/\s/g, "")}`} className={callClass}>
                 <Phone className="h-4 w-4" /> Call us
               </a>
               <Link href="/quote" className={`inline-flex items-center justify-center ${quoteClass}`}>

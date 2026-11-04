@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
 import { PageHeader, Card, EmptyState } from "@hericilla/ui";
-import { getCareers } from "@/lib/db";
-import { company } from "@/lib/company";
+import { getCareers, getContact } from "@/lib/db";
 import { ApplyForm } from "@/components/ApplyForm";
 import { MapPin, Building2 } from "lucide-react";
+
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Careers",
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 };
 
 export default async function CareersPage() {
-  const careers = await getCareers();
+  const [careers, contact] = await Promise.all([getCareers(), getContact()]);
+  const email = contact.adminOffice.email;
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-14">
@@ -65,8 +67,8 @@ export default async function CareersPage() {
         <h2 className="text-xl font-bold text-brand-900">Always recruiting good drivers</h2>
         <p className="mt-2 text-lg text-ink-soft">
           Even without an advertised role, SEN-certified and heavy-duty drivers with valid licences can write to{" "}
-          <a className="font-semibold underline" href={`mailto:${company.adminOffice.email}`}>
-            {company.adminOffice.email}
+          <a className="font-semibold underline" href={`mailto:${email}`}>
+            {email}
           </a>{" "}
           with their CV and licence details.
         </p>
